@@ -11,6 +11,7 @@ class MyHome extends StatefulWidget {
 }
 
 class MyHomeState extends State<MyHome> {
+  double _height = 100;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,20 +40,37 @@ class MyHomeState extends State<MyHome> {
                 ),
                 Row(
                   children: [
-                    Expanded (
+                    Expanded(
                       child: CardBox(
-                        height: 200, 
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Text('HEIGHT'),
-                            Text('183 cm', style: TextStyle(
-                              fontSize: 
-                            )),
-                          ],
-                        )
-                      ),
+                          height: 200,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'HEIGHT',
+                                style: Theme.of(context).textTheme.labelLarge,
+                              ),
+                              Text(
+                                '${_height.round()} cm',
+                                style: Theme.of(context).textTheme.displayLarge,
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 14),
+                                child: Slider(
+                                  min: 0,
+                                  max: 200,
+                                  value: _height,
+                                  onChanged: (value) =>
+                                      {setState(() => _height = value)},
+                                ),
+                              )
+                            ],
+                          )),
                     )
                   ],
                 )
