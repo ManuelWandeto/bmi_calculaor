@@ -20,7 +20,10 @@ class GenderInput extends StatelessWidget {
               size: 72,
             ),
             const SizedBox(height: 20),
-            Text(gender == Gender.male ? 'MALE' : 'FEMALE'),
+            Text(
+              gender == Gender.male ? 'MALE' : 'FEMALE',
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
           ],
         ),
       ),
