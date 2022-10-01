@@ -4,6 +4,8 @@ import 'components/height_input.dart';
 import 'components/number_input.dart';
 import 'components/calculate_button.dart';
 import 'results.dart';
+import 'dart:math' as math;
+import 'diagnose.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({super.key, required this.title});
@@ -12,7 +14,12 @@ class MyHome extends StatefulWidget {
   @override
   MyHomeState createState() => MyHomeState();
 }
+
 class MyHomeState extends State<MyHome> {
+  Gender? _activeGender;
+  double _height = 100;
+  double _weight = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +30,10 @@ class MyHomeState extends State<MyHome> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Results(title: widget.title),
+                builder: (context) => Results(
+                  title: widget.title,
+                  data: diagnose(_weight / math.pow(_height / 100, 2)),
+                ),
               ),
             );
           },
@@ -37,36 +47,66 @@ class MyHomeState extends State<MyHome> {
             child: Column(
               children: [
                 Row(
-                  children: const [
+                  children: [
                     Expanded(
-                      child: GenderInput(gender: Gender.male),
+                      child: GenderInput(
+                        gender: Gender.male,
+                        isActive: _activeGender != null &&
+                            _activeGender == Gender.male,
+                        onTap: () {
+                          setState(() {
+                            _activeGender = Gender.male;
+                          });
+                        },
+                      ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
-                    Expanded(child: GenderInput(gender: Gender.female))
+                    Expanded(
+                        child: GenderInput(
+                      gender: Gender.female,
+                      isActive: _activeGender != null &&
+                          _activeGender == Gender.female,
+                      onTap: () {
+                        setState(() {
+                          _activeGender = Gender.female;
+                        });
+                      },
+                    ))
                   ],
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                const HeightInput(),
+                HeightInput(
+                  onChanged: (value) {
+                    setState(() {
+                      _height = value;
+                    });
+                  },
+                ),
                 const SizedBox(
                   height: 20,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Expanded(
                       child: NumberInput(
                         label: 'WEIGHT',
                         unit: 'kgs',
+                        onChanged: (value) {
+                          setState(() {
+                            _weight = value;
+                          });
+                        },
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
-                    Expanded(
+                    const Expanded(
                       child: NumberInput(
                         label: 'AGE',
                       ),
@@ -79,5 +119,3 @@ class MyHomeState extends State<MyHome> {
         )));
   }
 }
-
-
