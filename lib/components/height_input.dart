@@ -15,7 +15,7 @@ class _HeightInputState extends State<HeightInput> {
   @override
   Widget build(BuildContext context) {
     return CardBox(
-      height: 200,
+      height: 190,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,

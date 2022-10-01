@@ -9,7 +9,7 @@ class GenderInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardBox(
-      height: 200,
+      height: 170,
       child: Align(
         alignment: Alignment.center,
         child: Column(
