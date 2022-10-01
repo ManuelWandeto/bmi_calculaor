@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'components/calculate_button.dart';
 import 'components/card_box.dart';
+import 'constants.dart';
 
 class Results extends StatelessWidget {
-  const Results({super.key, required this.title});
+  const Results({super.key, required this.title, required this.data});
   final String title;
+  final Map<String, String> data;
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
@@ -32,16 +35,16 @@ class Results extends StatelessWidget {
             ),
             CardBox(
               height: 500,
-              color: const Color(0xFF1D1F33),
+              color: kActiveCardColor,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const SizedBox(
                     height: 30,
                   ),
-                  const Text(
-                    'NORMAL',
-                    style: TextStyle(
+                  Text(
+                    data['label']!,
+                    style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w700,
                       fontFamily: 'Nunito',
@@ -49,7 +52,7 @@ class Results extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '22.1',
+                    data['bmi']!,
                     style: Theme.of(context)
                         .textTheme
                         .displayLarge
@@ -75,7 +78,7 @@ class Results extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: Text(
-                      'You have a normal body weight. keep it up!',
+                      data['message']!,
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
