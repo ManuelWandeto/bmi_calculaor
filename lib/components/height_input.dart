@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'card_box.dart';
 
 class HeightInput extends StatefulWidget {
-  const HeightInput({
-    super.key,
-  });
-
+  const HeightInput({super.key, this.onChanged});
+  final Function? onChanged;
   @override
   State<HeightInput> createState() => _HeightInputState();
 }
@@ -37,7 +35,10 @@ class _HeightInputState extends State<HeightInput> {
               min: 0,
               max: 200,
               value: _height,
-              onChanged: (value) => {setState(() => _height = value)},
+              onChanged: (value) {
+                setState(() => _height = value);
+                widget.onChanged?.call(_height);
+              },
             ),
           )
         ],

@@ -8,10 +8,11 @@ class NumberInput extends StatefulWidget {
     super.key,
     required this.label,
     this.unit = '',
+    this.onChanged,
   });
   final String label;
   final String unit;
-
+  final Function? onChanged;
   @override
   State<NumberInput> createState() => _NumberInputState();
 }
@@ -20,11 +21,17 @@ class _NumberInputState extends State<NumberInput> {
   double _value = 0;
   Timer? timer;
   void incrementValue() {
-    if (_value < 500) setState(() => _value++);
+    if (_value < 500) {
+      setState(() => _value++);
+      widget.onChanged?.call(_value);
+    }
   }
 
   void decrementValue() {
-    if (_value > 0) setState(() => _value--);
+    if (_value > 0) {
+      setState(() => _value--);
+      widget.onChanged?.call(_value);
+    }
   }
 
   void longPressHandler(Function callback) {
