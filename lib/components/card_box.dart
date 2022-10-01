@@ -8,7 +8,7 @@ class CardBox extends StatelessWidget {
     required this.child,
   });
   final double? height;
-  final Color color;
+  final Color? color;
   final Widget child;
 
   @override
