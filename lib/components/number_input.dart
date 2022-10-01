@@ -19,7 +19,6 @@ class NumberInput extends StatefulWidget {
 class _NumberInputState extends State<NumberInput> {
   double _value = 0;
   Timer? timer;
-  bool isLongPressed = false;
   void incrementValue() {
     if (_value < 500) setState(() => _value++);
   }
@@ -29,19 +28,15 @@ class _NumberInputState extends State<NumberInput> {
   }
 
   void longPressHandler(Function callback) {
-    isLongPressed = true;
     Future.delayed(const Duration(milliseconds: 200), () {
-      if (isLongPressed) {
-        timer = Timer.periodic(const Duration(milliseconds: 60), (timer) {
-          callback();
-        });
-      }
+      timer = Timer.periodic(const Duration(milliseconds: 60), (timer) {
+        callback();
+      });
     });
   }
 
   void longPressCancelHandler(Timer? timer) {
     if (timer != null) timer.cancel();
-    isLongPressed = false;
   }
 
   @override
