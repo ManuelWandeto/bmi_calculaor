@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'components/gender_input.dart';
 import 'components/height_input.dart';
 import 'components/number_input.dart';
+import 'components/calculate_button.dart';
+import 'results.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({super.key, required this.title});
@@ -10,12 +12,22 @@ class MyHome extends StatefulWidget {
   @override
   MyHomeState createState() => MyHomeState();
 }
-
 class MyHomeState extends State<MyHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text(widget.title)),
+        bottomSheet: CalculateButton(
+          label: 'CALCULATE YOUR BMI',
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Results(title: widget.title),
+              ),
+            );
+          },
+        ),
         body: Center(
             child: Padding(
           padding: const EdgeInsets.all(30),
@@ -60,11 +72,12 @@ class MyHomeState extends State<MyHome> {
                       ),
                     )
                   ],
-                )
+                ),
               ],
             ),
           ),
         )));
   }
 }
+
 
