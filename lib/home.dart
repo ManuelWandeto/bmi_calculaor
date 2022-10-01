@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'components/gender_input.dart';
-import 'components/card_box.dart';
+import 'components/height_input.dart';
+import 'components/number_input.dart';
 
 class MyHome extends StatefulWidget {
   const MyHome({super.key, required this.title});
@@ -11,7 +12,6 @@ class MyHome extends StatefulWidget {
 }
 
 class MyHomeState extends State<MyHome> {
-  double _height = 100;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,39 +38,26 @@ class MyHomeState extends State<MyHome> {
                 const SizedBox(
                   height: 20,
                 ),
+                const HeightInput(),
+                const SizedBox(
+                  height: 20,
+                ),
                 Row(
-                  children: [
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
                     Expanded(
-                      child: CardBox(
-                          height: 200,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'HEIGHT',
-                                style: Theme.of(context).textTheme.labelLarge,
-                              ),
-                              Text(
-                                '${_height.round()} cm',
-                                style: Theme.of(context).textTheme.displayLarge,
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 14),
-                                child: Slider(
-                                  min: 0,
-                                  max: 200,
-                                  value: _height,
-                                  onChanged: (value) =>
-                                      {setState(() => _height = value)},
-                                ),
-                              )
-                            ],
-                          )),
+                      child: NumberInput(
+                        label: 'WEIGHT',
+                        unit: 'kgs',
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      child: NumberInput(
+                        label: 'AGE',
+                      ),
                     )
                   ],
                 )
@@ -80,3 +67,4 @@ class MyHomeState extends State<MyHome> {
         )));
   }
 }
+
