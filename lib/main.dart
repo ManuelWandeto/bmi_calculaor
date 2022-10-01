@@ -8,14 +8,17 @@ void main() {
     theme: ThemeData.dark().copyWith(
       appBarTheme: const AppBarTheme(backgroundColor: Color(0xFF090C22)),
       scaffoldBackgroundColor: const Color(0xFF090C22),
-        textTheme: const TextTheme(
-            bodyMedium: TextStyle(
+      textTheme: TextTheme(
+          bodyMedium: const TextStyle(
               fontFamily: 'Nunito',
             ),
             labelLarge: TextStyle(
               fontFamily: 'Nunito',
+            fontSize: 16,
+            color: Colors.white.withOpacity(.8),
+            letterSpacing: 0.3,
             ),
-            displayLarge: TextStyle(
+          displayLarge: const TextStyle(
               fontFamily: 'Nunito',
               fontWeight: FontWeight.w800,
               fontSize: 54,
@@ -31,7 +34,7 @@ void main() {
       colorScheme: ColorScheme.fromSwatch(
         accentColor: const Color(0xFFEA1556),
         cardColor: const Color(0xFF101427),
-      )
+      ),
     ),
   ));
 }
